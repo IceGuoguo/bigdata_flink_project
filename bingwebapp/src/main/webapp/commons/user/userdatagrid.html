@@ -1,0 +1,232 @@
+<script>
+    $(function () {
+        $("#user_datagrid").datagrid({
+            url:"/bingApp/queryUserByPage",
+            method:"get",
+            fitColumns:true,
+            singleSelect:true,
+            pagination:true,
+            striped:true,
+            remoteSort:false,
+            fit:true,
+            pageSize:15,
+            pageNumber:1,
+            pageList:[5,10,15],
+            toolbar:'#tb',
+            columns:[[
+                {field:"id",title:"用户ID",width:5,sortable:true},
+                {field:"name",title:"名称",width:20},
+                {field:"email",title:"邮箱",width:20},
+                {field:"sex",title:"性别",width:20,formatter: function(value,row,index){
+                        if(value) {
+                            return "男"
+                        }else{
+                            return "女"
+                        }
+                    }
+                },
+                {field:"birthDay",title:"生日",width:10,align:"center"},
+                {field:"photo",title:"头像",width:20,formatter: function(value,row,index){
+                        return "<img width='30' src="+"http://192.168.111.130/"+value+">"
+                    }
+                }
+            ]]
+        })
+        //初始化搜索组件
+        $('#search_box').searchbox({
+            width:"30%",
+            searcher:function(value,name){
+                $("#user_datagrid").datagrid("load",{
+                    "column":name,
+                    "value":value
+                })
+            },
+            menu:'#searc_menu',
+            prompt:'请输入值'
+        });
+        //给添加按钮添加事件
+        $("#user_add_btn").click(function () {
+            $("#user_add_dialog").dialog("open")
+            //$("#user_datagrid").datagrid('appendRow',{"id":6,"name":"温晓琪",sex:false,"birthDay":"2019-10-10","photo":"/UserModel/user.jpg"})
+        })
+        //给删除按钮添加事件
+        $("#user_delete_btn").click(function () {
+            //$.messager.alert("添加","请添加信息")
+            var row = $("#user_datagrid").datagrid('getSelected');
+            if(row == null){
+                $.messager.show({
+                    title:'删除警告',
+                    msg:'请至少选择1行数据',
+                    timeout:5000,
+                    showType:'slide'
+                });
+                return
+            }
+            $.messager.confirm('删除确认对话', '您想要删除['+row.id+']记录吗？', function(r){
+                if (r){
+                    var rowIndex = $("#user_datagrid").datagrid('getRowIndex',row);
+                    $.ajax({
+                        url:"/bingApp/delteUserByIds",
+                        data:{"ids":row.id},
+                        type:"delete",
+                        success:function (data) {
+                            $("#user_datagrid").datagrid('deleteRow',rowIndex);
+                            $("#user_datagrid").datagrid("reload")
+                        }
+                    })
+                }
+            });
+        })
+        //给修改按钮添加 修改事件
+        $("#user_edit_btn").click(function () {
+            var row = $("#user_datagrid").datagrid('getSelected');
+            if(row == null){
+                $.messager.show({
+                    title:'编辑提示',
+                    iconCls:'icon-edit',
+                    msg:'请至少选择1行数据',
+                    timeout:5000,
+                    showType:'slide'
+                });
+                return
+            }
+
+            $("#user_update_dialog").data("row",row)//获取当前行数据
+            $("#user_update_dialog").dialog("open")//打开更新dialog
+        })
+        //初始化更新dialog
+        $("#user_update_dialog").dialog({
+            title:"用户更新",
+            iconCls:"icon-edit",
+            top:120,
+            width:300,
+            modal:true,
+            draggable:false,
+            closable:false,
+            closed:true,
+            cache:false,
+            href:"commons/user/update.html",
+            buttons:[{
+                text:"更新",
+                iconCls:"icon-ok",
+                plain:true,
+                handler:function(){//点击更新按钮跟新用户
+
+                    $("#user_update_form").form("submit",{
+                        url:"bingApp/updateUser",
+                        onSubmit: function(){
+                            if(!$("#user_update_form").form("validate")){
+                                $.messager.alert("表单提示","请检查您的表单输入")
+                                return false
+                            }
+                            $.messager.progress();
+                            return true
+                        },
+                        success:function(data){
+                            $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                            if(data){
+                                var error = eval('(' + data + ')');
+                                console.log(error)
+                                $.messager.alert("更新出错！","错误信息："+error.erroCode+",提示:"+error.message)
+                            }else{
+                                $("#user_update_dialog").dialog("close")
+                                $("#user_datagrid").datagrid("reload")
+                            }
+                        }
+                    })
+                }
+            },{
+                text:'取消',
+                iconCls:"icon-redo",
+                plain:true,
+                handler:function(){
+                    $("#user_update_dialog").dialog("close")
+                }
+            }],
+            onLoad:function () {
+                //加载完成表单回调
+                var row = $("#user_update_dialog").data("row");
+                $("#user_update_form").form("load",row)
+                //设置性别input组件
+                $("#update_sex_input").switchbutton({
+                    checked: true,
+                    onChange: function(checked){
+                        $("#user_update_form input[name='sex']").val(checked)
+                    }
+                })
+                if(!row.sex){//设置switchbutton状态
+                    $("#update_sex_input").switchbutton("uncheck")
+                }
+                //设置初始化值
+                $("#user_update_form input[name='sex']").val(row.sex)
+            }
+        })
+        //初始化添加dialog
+        $("#user_add_dialog").dialog({
+            title:"用户添加",
+            iconCls:"icon-add",
+            top:120,
+            width:300,
+            modal:true,
+            draggable:false,
+            closable:false,
+            closed:true,
+            cache:false,
+            href:"commons/user/add.html",
+            buttons:[{
+                text:"添加",
+                iconCls:"icon-ok",
+                plain:true,
+                handler:function(){//点击更新按钮跟新用户
+
+                    $("#user_add_form").form("submit",{
+                        url:"bingApp/addUser",
+                        onSubmit: function(){
+                            if(!$("#user_add_form").form("validate")){
+                                $.messager.alert("表单提示","请检查您的表单输入")
+                                return false
+                            }
+                            $.messager.progress();
+                            return true
+                        },
+                        success:function(data){
+                            $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                            if(data){
+                                var error = eval('(' + data + ')');
+                                console.log(error)
+                                $.messager.alert("添加出错！","错误信息："+error.erroCode+",提示:"+error.message)
+                            }else{
+                                $("#user_add_dialog").dialog("close")
+                                $("#user_datagrid").datagrid("load")
+                            }
+                        }
+                    })
+                }
+            },{
+                text:'取消',
+                iconCls:"icon-redo",
+                plain:true,
+                handler:function(){
+                    $("#user_add_dialog").dialog("close")
+                }
+            }]
+        })
+    })
+</script>
+<table id="user_datagrid">
+
+</table>
+<div id="tb" style="padding:2px 5px;">
+    <a id="user_add_btn" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+    <a id="user_edit_btn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
+    <a id="user_delete_btn" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+    <input id="search_box" />
+    <div id="searc_menu" style="width:120px">
+        <div data-options="name:'name',iconCls:'icon-man'">用户名</div>
+        <div data-options="name:'email',iconCls:'icon-email'">邮&nbsp;箱</div>
+    </div>
+</div>
+<!--更新dialog-->
+<div id="user_update_dialog"></div>
+<!--添加dialog-->
+<div id="user_add_dialog"></div>

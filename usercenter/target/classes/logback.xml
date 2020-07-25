@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender" >
+        <encoder>
+            <pattern>%p %c#%M %d{yyyy-MM-dd HH:mm:ss} %m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/userLoginFile-%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%p %c#%M %d{yyyy-MM-dd HH:mm:ss} %m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 控制台输出日志级别,关闭跟日志输出 -->
+    <root level="ERROR">
+        <appender-ref ref="STDOUT" />
+    </root>
+    <!--查看事务，additivity控制输出仅仅输出一次-->
+    <logger name="org.springframework.jdbc" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <!--查看SQL语句，additivity控制输出仅仅输出一次-->
+    <logger name="com.bing.dao" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <!--查看Controller ，additivity控制输出仅仅输出一次-->
+    <logger name="com.bing.controller.UserController" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+</configuration>

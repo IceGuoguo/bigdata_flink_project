@@ -1,0 +1,10 @@
+server:
+ servlet:
+  context-path: /BingWebApp
+
+spring:
+  mvc:
+    date-format: yyyy-MM-dd
+    view:
+      prefix: /
+      suffix: .jsp

@@ -1,0 +1,21 @@
+<form id="user_update_form" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" >
+    <input type="hidden" name="_method" value="put">
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px">
+        <input class="easyui-textbox" name="name" data-options="iconCls:'icon-man',prompt:'用户名',required:true" style="width: 100%;height: 30px"/>
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+        <input class="easyui-datebox" name="birthDay" data-options="editable:false,required:true"  style="width: 100%;height: 30px"/>
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+        <input class="easyui-textbox"  name="email" data-options="iconCls:'icon-email',type:'text',required:true" style="width: 100%;height: 30px"/>
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+        性别&nbsp;&nbsp;<input id="update_sex_input"   class="easyui-switchbutton" data-options="onText:'男',offText:'女'" checked value="true" >
+        <input name="sex" value="true"  hidden="hidden">
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+        <input name="photo" type="hidden">
+        <input class="easyui-filebox" name="multipartFile"   style="width: 100%;height: 30px"/>
+    </div>
+</form>

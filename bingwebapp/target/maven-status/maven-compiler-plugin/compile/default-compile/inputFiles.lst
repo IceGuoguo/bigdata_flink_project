@@ -1,0 +1,11 @@
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/controller/UserExceptionHandler.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/BingWebApplication.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/interceptors/UserForceLoginInterceptor.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/UserWebMvcConfigurer.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/exceptions/UserNameAndPasswordException.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/exceptions/VerifyCodeException.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/entity/User.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/entity/ErrorMessage.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/controller/KaptchaController.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/controller/WelcomeController.java
+/Users/JellyB/Documents/workspace_bing/flinkwebproject/bingwebapp/src/main/java/com/bing/controller/BingWebAppController.java

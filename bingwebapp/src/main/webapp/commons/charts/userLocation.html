@@ -1,0 +1,93 @@
+<script>
+    $(function () {
+        $.ajax({
+            url:"/chars/yearCount",
+            data:{"year":new Date().getFullYear()},
+            type:"get",
+            success:function(data){
+                $("#user_yearmonth_container").highcharts({
+                    title: {
+                        text: '系统月度分布图'
+                    },
+                    subtitle: {
+                        text: '百知教育'
+                    },
+                    chart:{
+                        backgroundColor: '#E0ECFF',
+                        type:"column",
+                        style: {
+                            fontFamily: "华文细微",
+                            fontSize: '12px',
+                            fontWeight: 'bold',
+                            color: '#95B8E7'
+                        },
+                    },
+                    xAxis: {
+                        title: {
+                            text: '月度分布',
+                            align:'middle'
+                        },
+                        categories: data.category
+                    },
+                    yAxis: {
+                        title: {
+                            text: '注册用户量',
+                            align:'middle'
+                        }
+                    },
+                    series: [{
+                        name:"用户数量",
+                        data:  data.data,
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }],
+                    credits: { //控制版权
+                        enabled:true,
+                        text: '百知教育',
+                        href: 'http://www.baizhiedu.com',
+                        style: {
+                            cursor: 'pointer',
+                            color: '#95B8E7',
+                            fontSize: '12px'
+                        }
+                    }
+                });
+               /* setInterval(function () {
+                    $.ajax({
+                        url: "/chars/yearCount",
+                        data: {"year": new Date().getFullYear()},
+                        type: "get",
+                        success: function (data) {
+                            $("#user_yearmonth_container").highcharts().series[0].update({
+                                data:data.data
+                            })
+                        }
+                    })
+                },5000)
+                */
+            }
+        })
+        var websocket=null
+        if('WebSocket' in window){
+            websocket = new WebSocket("ws://localhost:8888/websocket");
+        }
+        else{
+            alert('Not support websocket')
+        }
+        //连接成功
+        websocket.onopen=function (event) {
+            console.log(event.data)
+        }
+        websocket.onmessage = function(event){
+           console.log(event)
+            var month = event.data.split(":")[0];
+            var value = parseInt(event.data.split(":")[1])
+            var index = $("#user_yearmonth_container").highcharts().axes[0].categories.indexOf(month);
+            $("#user_yearmonth_container").highcharts().series[0].data[index].update(value);
+        }
+    })
+</script>
+<div id="user_yearmonth_container" style="width:100%;height:100%"></div>
+</div>
+

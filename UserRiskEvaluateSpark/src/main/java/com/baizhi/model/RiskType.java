@@ -1,0 +1,9 @@
+package com.baizhi.model;
+
+public interface RiskType {
+    String LOGIN_HABIT="LOGIN_HABIT_EXCEPTION";
+    String INPUTS_FUTURE="INPUTS_EXCEPTION";
+    String INPUT_PASWORD="PASWORD_EXCEPTION";
+    String LOGIN_REGION="LOGIN_REGION_EXCEPTION";
+    String LOGIN_DEVICE="LOGIN_DEVICE_EXCEPTION";
+}

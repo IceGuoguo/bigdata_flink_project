@@ -1,0 +1,29 @@
+<script>
+    $(function () {
+        $(".vrifyCodeImag").refreshCode({
+            lazyUrl:"kaptcha/defaultKaptcha"
+        })
+    })
+</script>
+<form id="user_login_form" method="post">
+<div style="padding-left: 10%;padding-right: 10%;margin-top: 10px">
+    <input class="easyui-textbox" name="name" data-options="iconCls:'icon-man',prompt:'用户名',required:true" style="width: 100%;height: 30px"/>
+</div>
+<div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+    <input class="easyui-textbox" name="password" data-options="iconCls:'icon-lock',type:'password',required:true" style="width: 100%;height: 30px"/>
+</div>
+<div style="padding-left: 10%;padding-right: 10%;margin-top:-10px;margin-bottom: 20px;">
+    <table style="width: 100%;height: 100%;border: 0;">
+        <tbody>
+            <tr >
+                <td style="width: 50%;height: 100%" >
+                    <img class="vrifyCodeImag" alt="图片验证码" />
+                </td>
+                <td style="width: 50%;height: 100%">
+                    <input class="easyui-textbox" name="verifyCode"  data-options="prompt:'验证码',required:true" style="width: 70%;height: 30px"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</form>

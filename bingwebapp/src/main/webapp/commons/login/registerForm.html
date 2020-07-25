@@ -1,0 +1,49 @@
+<script>
+    $(function () {
+        $("#register_sex_input").switchbutton({
+            checked: true,
+            onChange: function(checked){
+                $("#register_sex_input").switchbutton('setValue',checked)
+                $("input[name='sex']").val(checked)
+            }
+        })
+        $(".vrifyCodeImag").refreshCode({
+            lazyUrl:"kaptcha/defaultKaptcha"
+        })
+    })
+</script>
+<form id="user_rigister_form" method="post" enctype="multipart/form-data">
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px">
+        <input class="easyui-textbox" name="name" data-options="iconCls:'icon-man',prompt:'用户名',required:true" style="width: 100%;height: 30px"/>
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+        <input class="easyui-textbox"  name="password" data-options="iconCls:'icon-lock',type:'password',required:true" style="width: 100%;height: 30px"/>
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+        <input class="easyui-datebox" name="birthday" data-options="editable:false,required:true"  style="width: 100%;height: 30px"/>
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+        <input class="easyui-textbox"  name="email" data-options="iconCls:'icon-email',type:'text',required:true" style="width: 100%;height: 30px"/>
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+        性别&nbsp;&nbsp;<input id="register_sex_input"   class="easyui-switchbutton" data-options="onText:'男',offText:'女'" checked value="true" >
+        <input name="sex" value="true"  hidden="hidden">
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top: 10px;margin-bottom: 20px">
+        <input class="easyui-filebox" name="multipartFile"   style="width: 100%;height: 30px"/>
+    </div>
+    <div style="padding-left: 10%;padding-right: 10%;margin-top:-10px;margin-bottom: 20px;">
+        <table style="width: 100%;height: 100%;border: 0;">
+            <tbody>
+                <tr >
+                    <td style="width: 50%;height: 100%" >
+                        <img class="vrifyCodeImag" alt="图片验证码"/>
+                    </td>
+                    <td style="width: 50%;height: 100%">
+                        <input class="easyui-textbox" name="verifyCode"  data-options="prompt:'验证码',required:true" style="width: 70%;height: 30px"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

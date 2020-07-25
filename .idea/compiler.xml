@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bingwebapp" />
+        <module name="logflume" />
+        <module name="usercenter" />
+        <module name="UserRiskEvaluate" />
+        <module name="UserRiskEvaluateFlink" />
+        <module name="UserRiskEvaluateSpark" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bingwebapp" target="1.8" />
+      <module name="logflume" target="1.8" />
+      <module name="usercenter" target="1.8" />
+      <module name="UserRiskEvaluate" target="1.8" />
+      <module name="UserRiskEvaluateFlink" target="8" />
+      <module name="UserRiskEvaluateSpark" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

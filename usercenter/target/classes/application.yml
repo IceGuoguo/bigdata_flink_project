@@ -1,0 +1,19 @@
+server:
+ servlet:
+  context-path: /UserModel
+ port: 8888
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 111111
+    url: jdbc:mysql://localhost:3306/flink
+    driver-class-name: com.mysql.jdbc.Driver
+  http:
+    encoding:
+      charset: utf-8
+mybatis:
+  type-aliases-package: com.bing.entity
+  mapper-locations: com/bing/mapper/*Mapper.xml
+  executor-type: batch

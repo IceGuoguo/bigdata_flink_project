@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/UserRiskEvaluateFlink/UserRiskEvaluateFlink.iml" filepath="$PROJECT_DIR$/UserRiskEvaluateFlink/UserRiskEvaluateFlink.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UserRiskEvaluateSpark/UserRiskEvaluateSpark.iml" filepath="$PROJECT_DIR$/UserRiskEvaluateSpark/UserRiskEvaluateSpark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bingwebapp/bingwebapp.iml" filepath="$PROJECT_DIR$/bingwebapp/bingwebapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logflume/logflume.iml" filepath="$PROJECT_DIR$/logflume/logflume.iml" />
+      <module fileurl="file://$PROJECT_DIR$/usercenter/usercenter.iml" filepath="$PROJECT_DIR$/usercenter/usercenter.iml" />
+    </modules>
+  </component>
+</project>
